@@ -1,0 +1,127 @@
+
+LIST(APPEND WebCore_INCLUDE_DIRECTORIES
+  "${WEBCORE_DIR}/bridge/blackberry"
+  "${WEBCORE_DIR}/page/blackberry"
+  "${WEBCORE_DIR}/platform/image-decoders/rxi"
+  "${WEBCORE_DIR}/platform/image-encoders"
+  "${WEBCORE_DIR}/platform/graphics/blackberry"
+  "${WEBCORE_DIR}/platform/graphics/openvg"
+  "${WEBCORE_DIR}/platform/network/blackberry"
+  "${WEBCORE_DIR}/platform/text/blackberry"
+  "${WEBCORE_DIR}/platform/blackberry"
+  "${WEBKIT_DIR}/blackberry/Api"
+  "${WEBKIT_DIR}/blackberry/WebCoreSupport"
+  "${WEBKIT_DIR}/blackberry/WebKitSupport"
+  "${VG_DIR}/include"
+  "${VG_DIR}/include/VG"
+  "${VG_DIR}/include/KHR"
+  "${EGL_DIR}"
+  "${EGL_DIR}/include"
+  "${EGL_DIR}/include/EGL"
+)
+
+LIST(APPEND WebCore_LINK_FLAGS
+  "${OLYMPIA_LINK_FLAGS}"
+)
+
+# OpenVG sources
+LIST(APPEND WebCore_SOURCES
+  platform/image-decoders/openvg/ImageDecoderOpenVG.cpp
+  platform/graphics/openvg/EGLDisplayOpenVG.cpp
+  platform/graphics/openvg/GradientOpenVG.cpp
+  platform/graphics/openvg/ImageBufferOpenVG.cpp
+  platform/graphics/openvg/ImageOpenVG.cpp
+  platform/graphics/openvg/GraphicsContextOpenVG.cpp
+  platform/graphics/openvg/PathOpenVG.cpp
+  platform/graphics/openvg/PainterOpenVG.cpp
+  platform/graphics/openvg/PaintOpenVG.cpp
+  platform/graphics/openvg/PatternOpenVG.cpp
+  platform/graphics/openvg/SharedResourceOpenVG.cpp
+  platform/graphics/openvg/SurfaceOpenVG.cpp
+  platform/graphics/openvg/TiledImageOpenVG.cpp
+  platform/graphics/openvg/VGUtils.cpp
+)
+
+# Olympia sources
+LIST(APPEND WebCore_SOURCES
+  editing/blackberry/EditorBlackBerry.cpp
+  editing/blackberry/SmartReplaceBlackBerry.cpp
+  page/blackberry/AccessibilityObjectBlackBerry.cpp
+  page/blackberry/DragControllerBlackBerry.cpp
+  page/blackberry/EventHandlerBlackBerry.cpp
+  page/blackberry/FrameBlackBerry.cpp
+  platform/graphics/blackberry/FontBlackBerry.cpp
+  platform/graphics/blackberry/FontCacheBlackBerry.cpp
+  platform/graphics/blackberry/FontCustomPlatformDataBlackBerry.cpp
+  platform/graphics/blackberry/FontPlatformDataBlackBerry.cpp
+  platform/graphics/GlyphPageTreeNode.cpp
+  platform/graphics/blackberry/GlyphPageTreeNodeBlackBerry.cpp
+  platform/graphics/blackberry/SimpleFontDataBlackBerry.cpp
+  platform/graphics/blackberry/IconBlackBerry.cpp
+  platform/graphics/blackberry/IntPointBlackBerry.cpp
+  platform/graphics/blackberry/IntRectBlackBerry.cpp
+  platform/graphics/blackberry/IntSizeBlackBerry.cpp
+  platform/graphics/blackberry/PatternBlackBerry.cpp
+  platform/network/blackberry/AboutData.cpp
+  platform/network/blackberry/NetworkManager.cpp
+  platform/network/blackberry/NetworkStateNotifierBlackBerry.cpp
+  platform/network/blackberry/ResourceErrorBlackBerry.cpp
+  platform/network/blackberry/ResourceHandleBlackBerry.cpp
+  platform/network/blackberry/ResourceRequestBlackBerry.cpp
+  platform/blackberry/ClipboardBlackBerry.cpp
+  platform/blackberry/ContextMenuItemBlackBerry.cpp
+  platform/blackberry/ContextMenuBlackBerry.cpp
+  platform/blackberry/CookieJarBlackBerry.cpp
+  platform/blackberry/BlackBerryCookieCache.cpp
+  platform/blackberry/CursorBlackBerry.cpp
+  platform/blackberry/DragDataBlackBerry.cpp
+  platform/blackberry/DragImageBlackBerry.cpp
+  platform/blackberry/EventLoopBlackBerry.cpp
+  platform/blackberry/FileChooserBlackBerry.cpp
+  platform/blackberry/FileSystemBlackBerry.cpp
+  platform/blackberry/GeolocationServiceBlackBerry.cpp
+  platform/blackberry/SharedBufferBlackBerry.cpp
+  platform/blackberry/SSLKeyGeneratorBlackBerry.cpp
+  platform/blackberry/SystemTimeBlackBerry.cpp
+  platform/blackberry/KURLBlackBerry.cpp
+  platform/blackberry/Localizations.cpp
+  platform/blackberry/MIMETypeRegistryBlackBerry.cpp
+  platform/blackberry/PasteboardBlackBerry.cpp
+  platform/blackberry/PlatformKeyboardEventBlackBerry.cpp
+  platform/blackberry/PlatformMouseEventBlackBerry.cpp
+  platform/blackberry/PlatformScreenBlackBerry.cpp
+  platform/blackberry/PlatformTouchEventBlackBerry.cpp
+  platform/blackberry/PlatformTouchPointBlackBerry.cpp
+  platform/blackberry/PopupMenuBlackBerry.cpp
+  platform/blackberry/RenderThemeBlackBerry.cpp
+  platform/blackberry/ScrollbarBlackBerry.cpp
+  platform/blackberry/ScrollbarThemeBlackBerry.cpp
+  platform/blackberry/ScrollViewBlackBerry.cpp
+  platform/blackberry/SearchPopupMenuBlackBerry.cpp
+  platform/blackberry/SharedTimerBlackBerry.cpp
+  platform/blackberry/SoundBlackBerry.cpp
+  platform/blackberry/LoggingBlackBerry.cpp
+  platform/text/blackberry/StringBlackBerry.cpp
+  platform/text/TextEncodingDetectorNone.cpp
+  platform/blackberry/TemporaryLinkStubs.cpp
+  platform/text/blackberry/TextBreakIteratorBlackBerry.cpp
+  platform/text/blackberry/TextCodecBlackBerry.cpp
+  platform/blackberry/WheelEventBlackBerry.cpp
+  platform/blackberry/WidgetBlackBerry.cpp
+  plugins/blackberry/PluginDataBlackBerry.cpp
+  plugins/PluginPackage.cpp
+  plugins/PluginPackageNone.cpp
+  plugins/PluginView.cpp
+#  plugins/PluginViewNone.cpp
+#  plugins/blackberry/PluginPackageOlympia.cpp
+#  plugins/blackberry/PluginViewOlympia.cpp
+)
+
+
+LIST(APPEND WebCore_LIBRARIES
+)
+
+GENERATE_BUILD_INFO()
+LIST(APPEND WebCore_SOURCES
+   ${DERIVED_SOURCES_DIR}/BuildInformation.cpp
+)

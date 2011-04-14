@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAmanithVG_SRE", "libAmanithVG_SRE.vcproj", "{C99ECA2E-EBC2-43C2-8852-C351762E8136}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		SRE Debug (standalone)|Win32 = SRE Debug (standalone)|Win32
+		SRE Release (standalone)|Win32 = SRE Release (standalone)|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C99ECA2E-EBC2-43C2-8852-C351762E8136}.SRE Debug (standalone)|Win32.ActiveCfg = SRE Debug (standalone)|Win32
+		{C99ECA2E-EBC2-43C2-8852-C351762E8136}.SRE Debug (standalone)|Win32.Build.0 = SRE Debug (standalone)|Win32
+		{C99ECA2E-EBC2-43C2-8852-C351762E8136}.SRE Release (standalone)|Win32.ActiveCfg = SRE Release (standalone)|Win32
+		{C99ECA2E-EBC2-43C2-8852-C351762E8136}.SRE Release (standalone)|Win32.Build.0 = SRE Release (standalone)|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

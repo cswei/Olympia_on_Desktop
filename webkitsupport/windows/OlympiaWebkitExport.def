@@ -1,0 +1,3 @@
+LIBRARY	"webkit"
+EXPORTS
+    ??1WebDOMEventTarget@@QAE@XZ

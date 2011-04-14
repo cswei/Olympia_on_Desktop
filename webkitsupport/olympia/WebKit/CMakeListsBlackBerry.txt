@@ -1,0 +1,70 @@
+LIST(APPEND WebKit_INCLUDE_DIRECTORIES
+    "${JAVASCRIPTCORE_DIR}/wtf/text"
+    "${WEBCORE_DIR}/loader/appcache"
+    "${WEBCORE_DIR}/platform/graphics/blackberry"
+    "${WEBCORE_DIR}/platform/graphics/openvg"
+    "${WEBCORE_DIR}/platform/network/blackberry"
+    "${WEBCORE_DIR}/platform/blackberry"
+    "${WEBCORE_DIR}/svg/animation"
+    "${WEBCORE_DIR}/workers"
+    "${WEBKIT_DIR}/blackberry/WebCoreSupport"
+    "${WEBKIT_DIR}/blackberry/WebKitSupport"
+    "${WEBKIT_DIR}/blackberry/Api"
+    "${WEBKITTOOLS_DIR}/DumpRenderTree"
+    "${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry"
+    "${VG_DIR}/include"
+    "${VG_DIR}/include/VG"
+    "${VG_DIR}/include/KHR"
+    "${EGL_DIR}"
+    "${EGL_DIR}/include"
+    "${EGL_DIR}/include/EGL"
+)
+ADD_DEFINITIONS(-DUSER_PROCESSES)
+ADD_DEFINITIONS(-DENABLE_OLYMPIA_OBJECT_ALLOCATOR=1)
+LIST(APPEND WebKit_SOURCES
+    blackberry/Api/BackingStore.cpp
+    blackberry/Api/BlackBerryGlobal.cpp
+    blackberry/Api/OlympiaString.cpp
+    blackberry/Api/ResourceHolderImpl.cpp
+#    blackberry/Api/Version.cpp
+    blackberry/Api/WebPage.cpp
+    blackberry/Api/WebPageGroupLoadDeferrer.cpp
+    blackberry/Api/WebSettings.cpp
+    blackberry/BlackBerryLauncher/main.cpp
+    blackberry/WebCoreSupport/CacheClientBlackBerry.cpp
+    blackberry/WebCoreSupport/ChromeClientBlackBerry.cpp
+    blackberry/WebCoreSupport/CollectableObjects.cpp
+    blackberry/WebCoreSupport/ContextMenuClientBlackBerry.cpp
+    blackberry/WebCoreSupport/DragClientBlackBerry.cpp
+    blackberry/WebCoreSupport/EditCommandBlackBerry.cpp
+    blackberry/WebCoreSupport/EditorClientBlackBerry.cpp
+    blackberry/WebCoreSupport/FrameLoaderClientBlackBerry.cpp
+    blackberry/WebCoreSupport/InspectorClientBlackBerry.cpp
+    blackberry/WebCoreSupport/JavaScriptDebuggerBlackBerry.cpp
+    blackberry/WebCoreSupport/MainThreadBlackBerry.cpp
+    blackberry/WebCoreSupport/PluginWidget.cpp
+    blackberry/WebKitSupport/BackingStoreScrollbar.cpp
+    blackberry/WebKitSupport/BackingStoreTile.cpp
+    blackberry/WebKitSupport/InputHandler.cpp
+    blackberry/WebKitSupport/BlackBerryAnimation.cpp
+    blackberry/WebKitSupport/OutOfMemoryHandler.cpp
+    blackberry/WebKitSupport/RenderQueue.cpp
+    blackberry/WebKitSupport/SelectionHandler.cpp
+    blackberry/WebKitSupport/SurfacePool.cpp
+    blackberry/WebKitSupport/TouchEventHandler.cpp
+    blackberry/WebKitSupport/WebPlugin.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/AccessibilityController.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/AccessibilityUIElement.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/LayoutTestController.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/WorkQueue.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/AccessibilityControllerBlackBerry.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/AccessibilityUIElementBlackBerry.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/DumpRenderTree.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/EventSender.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/GCControllerBlackBerry.cpp
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/LayoutTestControllerBlackBerry.cpp 
+    ${WEBKITTOOLS_DIR}/DumpRenderTree/blackberry/WorkQueueItemBlackBerry.cpp
+)
+
+
+SET(WebKit_LINK_FLAGS ${OLYMPIA_LINK_FLAGS})

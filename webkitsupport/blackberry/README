@@ -1,0 +1,9 @@
+This folder contains the olympia platform specific header files, and the implementation on Linux of the interfaces defined in these header files.
+
+To make it compile , the header files were modified as below:
+
+1.  OlympiaPlatformMisc.h   // function getlocaltime() added for JavaScriptCore/wtf/DateMath.cpp
+2.  ScopePointer.h     // line 94,  delete[] m_object;  changed to delete[] this->m_object;
+3.  streams/NetworkRequest.h    // include <limits.h>   for INT_MAX
+
+Might need to revert above changes when RIM delivers the right version of above files.
