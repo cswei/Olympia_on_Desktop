@@ -1,7 +1,0 @@
-LIST(APPEND JavaScriptCore_SOURCES
-    runtime/MarkStackBlackBerry.cpp
-    wtf/unicode/blackberry/UnicodeBlackBerry.cpp
-    wtf/unicode/blackberry/icu.cpp
-)
-
-SET(JavaScriptCore_LINK_FLAGS ${OLYMPIA_LINK_FLAGS})
