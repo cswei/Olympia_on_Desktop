@@ -1540,6 +1540,7 @@ IF (ENABLE_VIDEO)
         html/TimeRanges.cpp
 	
         platform/graphics/blackberry/MediaPlayerPrivateBlackBerry.cpp
+        platform/graphics/blackberry/MediaPlayerProxy.cpp
         platform/graphics/MediaPlayer.cpp
 
         rendering/MediaControlElements.cpp
