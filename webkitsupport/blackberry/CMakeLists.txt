@@ -22,6 +22,7 @@ SET(DERIVED_SOURCE_DIR ${CMAKE_BINARY_DIR}/DerivedSources)
 set(WebKitSupport_MOC_HDRS
     streams/qt/OlympiaNetworkCookieJarQt.h
     streams/qt/OlympiaHttpStreamQt.h
+    SocketStreamHandlePrivate.h
 )
 QT4_WRAP_CPP(WebKitSupport_MOC_SRCS ${WebKitSupport_MOC_HDRS})
 QT4_GENERATE_MOC(OlympiaPlatformTimer.cpp ${DERIVED_SOURCE_DIR}/OlympiaPlatformTimer.moc)
@@ -74,6 +75,8 @@ SET(WebKit_INCLUDE_DIRECTORIES
     "${DERIVED_SOURCES_DIR}"
     "${CMAKE_BINARY_DIR}"
     "${CMAKE_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_CURRENT_BINARY_DIR}"
     "${CMAKE_CURRENT_SOURCE_DIR}/streams"
     "${CMAKE_CURRENT_SOURCE_DIR}/streams/qt"
     "${WEBCORE_DIR}/platform/network/blackberry"
@@ -109,6 +112,7 @@ LIST(APPEND WebKitSupport_SOURCES
     text/TextEngineFreeType.cpp
     ${WebKitSupport_MOC_SRCS}
     ${DERIVED_SOURCE_DIR}/OlympiaPlatformTimer.moc
+    SocketStreamHandleQt.cpp
 )
 
 source_group(streams "streams/")

@@ -115,6 +115,17 @@ LIST(APPEND WebCore_SOURCES
 #  plugins/PluginViewNone.cpp
 #  plugins/blackberry/PluginPackageOlympia.cpp
 #  plugins/blackberry/PluginViewOlympia.cpp
+
+# for WebSocket implementation
+  bindings/js/JSWebSocketConstructor.cpp
+  bindings/js/JSWebSocketCustom.cpp
+  websockets/ThreadableWebSocketChannel.cpp
+  websockets/WebSocketChannel.cpp
+  websockets/WebSocket.cpp
+  websockets/WebSocketHandshake.cpp
+  websockets/WebSocketHandshakeRequest.cpp
+  websockets/WorkerThreadableWebSocketChannel.cpp
+  platform/network/SocketStreamHandleBase.cpp
 )
 
 

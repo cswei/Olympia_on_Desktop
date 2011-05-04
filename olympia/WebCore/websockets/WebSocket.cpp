@@ -150,8 +150,8 @@ void WebSocket::connect(const KURL& url, const String& protocol, ExceptionCode& 
         return;
     }
 
-//    m_channel = ThreadableWebSocketChannel::create(scriptExecutionContext(), this, m_url, m_protocol);
-//    m_channel->connect();
+    m_channel = ThreadableWebSocketChannel::create(scriptExecutionContext(), this, m_url, m_protocol);
+    m_channel->connect();
     ActiveDOMObject::setPendingActivity(this);
 }
 
