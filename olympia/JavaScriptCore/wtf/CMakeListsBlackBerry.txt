@@ -3,7 +3,7 @@ LIST(APPEND WTF_LINK_FLAGS
 )
 
 LIST(APPEND WTF_SOURCES
-    ThreadingNone.cpp
+    ThreadIdentifierDataPthreads.cpp
+    ThreadingPthreads.cpp
 )
 
-ADD_DEFINITIONS(-DENABLE_SINGLE_THREADED)

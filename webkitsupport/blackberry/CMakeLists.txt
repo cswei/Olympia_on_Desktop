@@ -23,6 +23,7 @@ set(WebKitSupport_MOC_HDRS
     streams/qt/OlympiaNetworkCookieJarQt.h
     streams/qt/OlympiaHttpStreamQt.h
     SocketStreamHandlePrivate.h
+    OlympiaPlatformMainThreadInvoker.h
 )
 QT4_WRAP_CPP(WebKitSupport_MOC_SRCS ${WebKitSupport_MOC_HDRS})
 QT4_GENERATE_MOC(OlympiaPlatformTimer.cpp ${DERIVED_SOURCE_DIR}/OlympiaPlatformTimer.moc)

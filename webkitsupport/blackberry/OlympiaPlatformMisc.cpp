@@ -31,6 +31,7 @@
 
 #include "config.h"
 #include "OlympiaPlatformMisc.h"
+#include "OlympiaPlatformMainThreadInvoker.h"
 
 #if defined(OLYMPIA_LINUX) || defined(OLYMPIA_MAC)
 #include <stdlib.h>
@@ -69,6 +70,25 @@ using namespace std;
 
 namespace Olympia {
 namespace Platform {
+
+CallBackFunc MainThreadInvoker::m_callback = 0;
+MainThreadInvoker::MainThreadInvoker()
+{
+    moveToThread(QCoreApplication::instance()->thread());
+}
+
+void MainThreadInvoker::setCallBack(CallBackFunc callback)
+{
+    m_callback = callback;
+}
+
+void MainThreadInvoker::dispatch()
+{
+    if (m_callback)
+        m_callback();
+}
+
+Q_GLOBAL_STATIC(MainThreadInvoker, webkit_main_thread_invoker)
 
 // Return current UTC time in milliseconds
 double currentUTCTimeMS()
@@ -336,7 +356,8 @@ void scheduleLazyInitialization()
 
 void scheduleCallOnMainThread(void(*callback)(void))
 {
-    notImplemented();
+    MainThreadInvoker::setCallBack(callback);
+    QMetaObject::invokeMethod(webkit_main_thread_invoker(), "dispatch", Qt::QueuedConnection);
 }
 
 // This logs events to on-device log file through Java EventLogger.
@@ -374,3 +395,22 @@ void getlocaltime(uint64_t* utc, uint64_t* local, int* isDst)
 {
     notImplemented();
 }
+
+#if defined(OLYMPIA_WINDOWS)
+// Pthread_attr_getstack  and pthread_attr_setstack are needed to extend Pthread-win32 for simulating pthread's functions on linux.
+// These functions are used in ThreadingPthreads.cpp.
+int pthread_attr_getstack(const pthread_attr_t* attr, void** stackaddr, size_t* stacksize)
+{
+    int res = pthread_attr_getstackaddr(attr, stackaddr);
+    if(res == 0)
+        res = pthread_attr_getstacksize(attr, stacksize);
+    return res;
+}
+int pthread_attr_setstack(pthread_attr_t* attr, void* stackaddr, size_t stacksize)
+{
+    int res = pthread_attr_setstackaddr(attr, stackaddr);
+    if(res == 0)
+        res = pthread_attr_setstacksize(attr, stacksize);
+    return res;
+}
+#endif

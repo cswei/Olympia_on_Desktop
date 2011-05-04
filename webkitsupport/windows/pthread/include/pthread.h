@@ -913,6 +913,10 @@ PTW32_DLLPORT int PTW32_CDECL pthread_attr_setscope (pthread_attr_t *,
 
 PTW32_DLLPORT int PTW32_CDECL pthread_attr_getscope (const pthread_attr_t *,
                                    int *);
+#if PLATFORM(OLYMPIA)
+    int  pthread_attr_getstack(const pthread_attr_t* attr, void** stackaddr, size_t* stacksize);
+    int  pthread_attr_setstack(pthread_attr_t* attr, void* stackaddr, size_t stacksize);
+#endif
 
 /*
  * PThread Functions

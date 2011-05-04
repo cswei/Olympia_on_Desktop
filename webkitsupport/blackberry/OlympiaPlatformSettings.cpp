@@ -44,6 +44,11 @@ Settings::Settings()
     m_localUserStorageFolder = "~/OlympiaBrowser";
     m_databaseFolder = "~/OlympiaBrowser";
     m_maxPixelsPerDecodedImage = 1024 * 1024;
+#if defined(OLYMPIA_WINDOWS)
+    m_secondaryThreadStackSize = 64 * 1024;
+#else
+    m_secondaryThreadStackSize = 5;
+#endif
 }
 
 Settings* Settings::get()

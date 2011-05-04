@@ -195,13 +195,22 @@ ThreadIdentifier createThreadInternal(ThreadFunction entryPoint, void* data, con
     pthread_t threadHandle;
     if (pthread_create(&threadHandle, &attr, entryPoint, data)) {
         LOG_ERROR("pthread_create() failed: %d", errno);
+#ifdef OLYMPIA_WINDOWS
+        threadHandle.p = 0;
+#else
         threadHandle = 0;
+#endif
     }
 
     pthread_attr_destroy(&attr);
 
+#ifdef OLYMPIA_WINDOWS
+    if (!threadHandle.p)
+        return 0;
+#else
     if (!threadHandle)
         return 0;
+#endif
 
     return establishIdentifierForPthreadHandle(threadHandle);
 }
@@ -236,8 +245,14 @@ int waitForThreadCompletion(ThreadIdentifier threadID, void** result)
     ASSERT(threadID);
 
     pthread_t pthreadHandle = pthreadHandleForIdentifier(threadID);
+	
+#ifdef OLYMPIA_WINDOWS
+    if (!pthreadHandle.p)
+        return 0;
+#else
     if (!pthreadHandle)
         return 0;
+#endif
 
     int joinResult = pthread_join(pthreadHandle, result);
     if (joinResult == EDEADLK)
@@ -251,8 +266,14 @@ void detachThread(ThreadIdentifier threadID)
     ASSERT(threadID);
 
     pthread_t pthreadHandle = pthreadHandleForIdentifier(threadID);
+
+#ifdef OLYMPIA_WINDOWS
+    if (!pthreadHandle.p)
+        return;
+#else
     if (!pthreadHandle)
         return;
+#endif
 
     pthread_detach(pthreadHandle);
 }
