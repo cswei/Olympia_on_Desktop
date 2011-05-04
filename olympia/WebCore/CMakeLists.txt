@@ -390,6 +390,15 @@ SET(WebCore_IDL_FILES
     websockets/WebSocket.idl
 )
 
+IF (ENABLE_VIDEO)
+    SET(VIDEO_IDL_FILES 
+        html/TimeRanges.idl
+    )
+    LIST(APPEND WebCore_IDL_FILES
+          ${VIDEO_IDL_FILES}
+    )
+ENDIF()
+
 IF (ENABLE_SVG)
     SET(SVG_IDL_FILES
         svg/SVGAElement.idl
@@ -1518,6 +1527,25 @@ IF (ENABLE_NETSCAPE_PLUGIN_API)
     LIST(APPEND WebCore_SOUCES
         plugins/npapi.cpp
     )
+ENDIF()
+
+IF (ENABLE_VIDEO)
+    LIST(APPEND WebCore_SOURCES
+        bindings/js/JSAudioConstructor.cpp
+        
+        html/HTMLAudioElement.cpp
+        html/HTMLMediaElement.cpp
+        html/HTMLSourceElement.cpp
+        html/HTMLVideoElement.cpp
+        html/TimeRanges.cpp
+	
+        platform/graphics/blackberry/MediaPlayerPrivateBlackBerry.cpp
+        platform/graphics/MediaPlayer.cpp
+
+        rendering/MediaControlElements.cpp
+        rendering/RenderMedia.cpp
+        rendering/RenderVideo.cpp
+        )
 ENDIF()
 
 IF (ENABLE_SVG)
