@@ -49,6 +49,7 @@
 
 class QImage;
 class QNetworkReply;
+class QAuthenticator;
 
 namespace Olympia {
 namespace Browser {
@@ -87,6 +88,9 @@ public slots:
     void slotWindowSizeChanged();
     void setMultiTouchMode();
     void unsetMultiTouchMode();
+
+private slots:
+    void slotAuthenticationRequired(QNetworkReply*, QAuthenticator*);
 
 public:
     enum NavigationMode {

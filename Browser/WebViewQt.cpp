@@ -41,9 +41,15 @@
 #include "OlympiaPlatformReplaceText.h"
 #include "OlympiaStreamFactory.h"
 #include <QApplication>
+#include <QAuthenticator>
 #include <QClipboard>
 #include <QDebug>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QImage>
+#include <QGridLayout>
+#include <QLabel>
+#include <QLineEdit>
 #include <QNetworkReply>
 #include <QtCore/QTimer>
 #include <QtGui/QImage>
@@ -123,6 +129,8 @@ WebView::WebView(QSize viewSize, QWidget *w, Qt::WindowFlags f)
     setFocusPolicy(Qt::StrongFocus);
     setAttribute(Qt::WA_InputMethodEnabled);
 
+    connect(NetworkQt::getNetworkMgrInstance(), SIGNAL(authenticationRequired(QNetworkReply*, QAuthenticator*)),
+            this, SLOT(slotAuthenticationRequired(QNetworkReply*, QAuthenticator*)));
     connect(&m_scrollTimer, SIGNAL(timeout()), this, SLOT(animateScroll()));
 }
 
@@ -132,6 +140,45 @@ WebView::~WebView()
     delete m_screenImage;
     delete m_eventHandler;
 }
+
+void WebView::slotAuthenticationRequired(QNetworkReply* reply, QAuthenticator* authenticator)
+{
+    QDialog* dialog = new QDialog(QApplication::activeWindow());
+    dialog->setWindowTitle("HTTP Authentication");
+
+    QGridLayout* layout = new QGridLayout(dialog);
+    dialog->setLayout(layout);
+
+    QLabel* messageLabel = new QLabel(dialog);
+    messageLabel->setWordWrap(true);
+    QString messageStr = QString("Enter with username and password for: %1");
+    messageLabel->setText(messageStr.arg(reply->url().toString()));
+    layout->addWidget(messageLabel, 0, 1);
+
+    QLabel* userLabel = new QLabel("Username:", dialog);
+    layout->addWidget(userLabel, 1, 0);
+    QLineEdit* userInput = new QLineEdit(dialog);
+    layout->addWidget(userInput, 1, 1);
+
+    QLabel* passLabel = new QLabel("Password:", dialog);
+    layout->addWidget(passLabel, 2, 0);
+    QLineEdit* passInput = new QLineEdit(dialog);
+    passInput->setEchoMode(QLineEdit::Password);
+    layout->addWidget(passInput, 2, 1);
+
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok
+            | QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
+    connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+    layout->addWidget(buttonBox, 3, 1);
+
+    if (dialog->exec() == QDialog::Accepted) {
+        authenticator->setUser(userInput->text());
+        authenticator->setPassword(passInput->text());
+    }
+    delete dialog;
+}
+
 
 void WebView::createWebPageIfNeeded()
 {
